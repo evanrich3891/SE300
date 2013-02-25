@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Main implements ActionListener{
 	JFrame frame;
@@ -16,6 +17,9 @@ public class Main implements ActionListener{
 		gui.go();		
 	}
 	public void go() {
+		DefaultRouteTable route = new DefaultRouteTable();
+		//System.out.println(route.routeInfo());
+		route.routeInfo();
 		totalSize = Toolkit.getDefaultToolkit().getScreenSize();	// getting screen size
 		int width = totalSize.width;
 		int height = totalSize.height;
@@ -31,20 +35,23 @@ public class Main implements ActionListener{
 	}
 
 	public JPanel Panels() {
+		//JScrollPane scroll = new JScrollPane();
+		//scroll.getVerticalScrollBar();
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		JPanel routePanel = new JPanel();
-		routePanel.setBackground(Color.black);
-		routePanel.setPreferredSize(new Dimension(totalSize.width * 3 / 7, totalSize.height / 3));
+		JScrollPane routePanel = new JScrollPane();
+		routePanel.setPreferredSize(new Dimension((totalSize.width * 3 / 4) * 1 / 2, totalSize.height / 3));
+		routePanel.setBorder(BorderFactory.createTitledBorder("Route Table"));
+		//routePanel.add(scroll);
+		//------------------------------------------------end of route table--------------------------------------------------------
 		JPanel histPanel = new JPanel();
-		histPanel.setBackground(Color.green);
 		histPanel.setPreferredSize(new Dimension(totalSize.width, totalSize.height / 5));
+		histPanel.setBorder(BorderFactory.createTitledBorder("History"));
+		//------------------------------------------------end of history table--------------------------------------------------------
 		JPanel resultsPanel = new JPanel();
-		resultsPanel.setBackground(Color.blue);
-		resultsPanel.setPreferredSize(new Dimension(totalSize.width * 4 / 7, totalSize.height / 3));
-		JLabel searchRes = new JLabel("Search Results:");
-		searchRes.setFont(new Font("Serif", Font.PLAIN, 20));
-		//searchRes.setBounds(totalSize.width / 2, 0);
-		resultsPanel.add(searchRes, BorderLayout.NORTH);
+		resultsPanel.setPreferredSize(new Dimension((totalSize.width * 3 / 4) * 49 / 100, totalSize.height / 3));
+		resultsPanel.setBorder(BorderFactory.createTitledBorder("Search Results"));
+		resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.X_AXIS));
+		//------------------------------------------------end of results table--------------------------------------------------------
 		
 		mainPanel.add(routePanel, BorderLayout.WEST);
 		mainPanel.add(histPanel, BorderLayout.SOUTH);
